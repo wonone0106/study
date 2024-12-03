@@ -1,10 +1,30 @@
 # Stack
-스텍은 원소의 삽입, 삭제가 **한쪽** 끝에서만 발생하는 선형 리스트이다.    
-이런 입출력 형태를 **LIFO(후입선출)** 이라고 한다.
+스텍은 원소의 삽입, 삭제가 **한쪽 끝에서만 발생**하는 선형 리스트이다.    
 
-**top 포인터는 마지막에 들어온 데이터를 가르킨다.**
+스텍의 입출력 형태는 **LIFO(후입선출)** 이며, **가장 나중에 들어온 데이터가 가장 먼저 나가는 형태**이다.
+
+**top** : **마지막에 들어온 데이터**를 가르키는 포인터 변수이다.   
+**element** : 스텍을 구성하는 **데이터 타입**이다.
 ## Stack의 연산
-1. 삽입 연산
+1. is_full
+    ```c
+    int is_full(){
+        if(top>=STACK_SIZE-1){
+            return true;
+        }
+        else return false;
+    }
+    ```
+2. is_empty
+    ```c
+    int is_empty(){
+        if(top==-1){
+            return true;
+        }
+        else return false;
+    }
+    ```
+3. 삽입 연산
     ```c
     #define STACK_SIZE 5
     typedef int element;
@@ -12,14 +32,13 @@
     int top = -1;
 
     void push(element item){
-        if(top>=STACK_SIZE-1){
+        if(is_full()==true){
             printf("Stack is Full!\n");
-            return;
         }
         else return stack[++top] = item;
     }
     ```
-2. 삭제 연산
+4. 삭제 연산
     ```c
     #define STACK_SIZE 5
     typedef int element;
@@ -27,9 +46,8 @@
     int top = -1;
 
     element pop(){
-        if(top == -1){
+        if(is_empty()==true){
             printf("Stack is Empty!!\n");
-            return ();
         }
         else return stack[top--];
     }
@@ -38,15 +56,13 @@
 
 ### stack 예시
 ---
-#### EmptyStack -> push(A) -> push(B) -> pop -> push(C) -> push(D) -> pop    
+#### EmptyStack(5) -> push(A) -> push(B) -> pop -> push(C) -> push(D) -> pop    
 
 
-|ㅤ|ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->  
-| A |ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->   
-| A | B |ㅤ|ㅤ|ㅤ|ㅤ->    
-| A |ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->    
-| A | C |ㅤ|ㅤ|ㅤ|ㅤ->    
-| A | C | D |ㅤ|ㅤ|ㅤ->    
+|ㅤ|ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->ㅤ| A |ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->ㅤ| A | B |ㅤ|ㅤ|ㅤ|ㅤ->    
+
+| A |ㅤ|ㅤ|ㅤ|ㅤ|ㅤ->ㅤ| A | C |ㅤ|ㅤ|ㅤ|ㅤ->ㅤ| A | C | D |ㅤ|ㅤ|ㅤ->    
+
 | A | C |ㅤ|ㅤ|ㅤ|
 
 ---
