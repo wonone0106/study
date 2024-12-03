@@ -68,3 +68,140 @@
     ```
 ### 결과
 ![result](./ListEx.png)
+
+## 단순 연결 리스트 연산
+1. 삽입 연산   
+
+    i. insert_first      
+    ```c
+    ListNode* insert_first(ListNode *head, element value){
+        ListNode *p = (ListNode *)malloc(sizeof(ListNode));
+        p->data = value;
+        p->link = head;
+        head = p;
+        return head;
+    }
+    ```
+
+    ii.   
+    ```c
+    ListNode* insert(ListNode *head, ListNode *pre, element value){
+        ListNode *p = (ListNode *)malloc(sizeof(ListNode));
+        p->data = value;
+        p->link = pre->link;
+        pre->link = p;
+        return head;
+    }
+    ```
+2. 삭제 연산  
+
+    i. delete_first
+    ```c
+    ListNode* delete_first(ListNode *head){
+        ListNode *removed;
+        if(head == NULL) return NULL;
+        removed = head;
+        head = removed->link;
+        free(removed);
+        return head;
+    }
+    ```
+
+    ii. delete
+    ```c
+    ListNode* delete(ListNode *head, ListNode *pre){
+        ListNode *removed;
+        removed = pre->link;
+        pre->link = remode->link;
+        free(removed);
+        return head;
+    }
+
+### 리스트를 역순으로 구현하는 코드
+```c
+ListNode* reverse(ListNode *head){
+    // 순회 포인로 p, q, r을 사용
+    ListNode *p, *q, *r;
+    p = head;
+    q = NULL;
+    while(p != NULL){
+        r = q;
+        q = p;
+        p = p->link;
+        q->link = r;
+    }
+    return q;
+}
+```
+# 원형 연결 리스트
+원형 연결 리스트는 **마지막 노드의 링크가 첫 번째 노드를 가리키는** 리스트
+
+**장점** : 한 노드에서 다른 모든 노드로의 접근이 가능
+
+## 원형 연결 리스트 연산
+1. 삽입
+    i. insert_first
+    ```c
+    void insert_first(ListNode *head, element data){
+        ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+        node -> data = data;
+        if(head == NULL){
+            head = node;
+            node->link = head;
+        }
+        else{
+            node->link = head->link;
+            head->link = node;
+        }
+        return head;
+    }
+    ```
+    ii. insert_last
+    ```c
+    void insert_last(ListNode *head, element data){
+        ListNode *node = (ListNode*)malloc(sizeof(ListNode));
+        node->data = data;
+        if(head == NULL){
+            head = node;
+            node->link = head;
+        }
+        else{
+            node->link = head->link;
+            head->link = node;
+            head = node;
+        }
+        return head;
+    }
+    ```
+# 이중 연결 리스트
+하나의 노드가 선행 노드와 후속 노드에 대한 **두 개의 링크**를 가지는 리스트,  
+ 링크가 양방향이므로 양방향으로 검색이 가능 그러나 **공간을 많이 차지**하고 **코드가 복잡**.
+
+## 이중 연결 리스트의 노드 구조
+```c
+typedef int element;
+typedef struct DlistNode{
+    element data;
+    struct DlistNode *llink;
+    struct DlistNode *rlink;
+} DlistNode;
+```
+## 이중 연결 리스트 연산
+1. 삽입
+    ```c
+    void dinsert_node(DlistNode *before, DlistNode *new_node){
+        new_node->llink = before;
+        new_node->rlink = before->link;
+        before->rlink->llink = new_node;
+        before->rlink = new_node;
+    }
+    ```
+2. 삭제
+    ```c
+    void dinsert_node(DlistNode *phead_node, DlistNode *removed){
+        if(removed == phead_node) return;
+        removed->llink->rlink = removed->rlink;
+        removed->rlink->llink = removed->llink;
+        free(removed);
+    }
+    ```
