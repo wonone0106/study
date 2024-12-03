@@ -20,10 +20,15 @@
 
 ## 이진 트리의 순회
 1. 전위 순회 (VLR)
+
     ![VLR](./image/VLR.png)
+
 2. 중위 순회 (LVR)
+
     ![LVR](./image/LVR.png)
+
 3. 후위 순회 (LRV)
+
     ![LRV](./image/LRV.png)
 
 # 이진 탐색 트리(Binary search tree)
