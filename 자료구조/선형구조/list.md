@@ -67,4 +67,4 @@
     head->link = p;
     ```
 ### 결과
-![result](./LIstEx.png)
+![result](./ListEx.png)
